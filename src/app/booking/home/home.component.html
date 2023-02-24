@@ -1,0 +1,20 @@
+<main>
+    <header>
+        <small>Hello!</small>
+        <h3>Book your tour now</h3>
+    </header>
+
+    <div class="content">
+        <h3>Next tour at</h3>
+        <h1>11:00</h1>
+    </div>
+
+    <app-boat [active]="openSun"></app-boat>
+
+    <app-button
+    bg="var(--secondary)"
+    text="Book now"
+    icon=""
+    (clickEvent)="bookNow()"
+    ></app-button>
+</main>

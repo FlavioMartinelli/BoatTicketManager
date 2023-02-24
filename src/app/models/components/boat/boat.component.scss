@@ -1,0 +1,24 @@
+svg {
+    width: 100%;
+    height: auto;
+    transform: translateY(20px) scale(1.3);
+    
+    transform-origin: bottom center;
+
+    #SUN,
+    #BOAT {
+        transform-origin: bottom center;
+        transition: all 1s ease-in-out;
+    }
+
+    &.active {
+        #SUN{
+            transform: translateY(-50%) scale(2);
+            fill: var(--primary);
+        }
+
+        #BOAT {
+            transform: scale(2) translateY(50%);
+        }
+    }
+}
