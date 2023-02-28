@@ -1,1 +1,12 @@
-<p>timepicker works!</p>
+<div class="list">
+    <span
+    *ngFor="let t of times"
+    [ngClass]="{
+        'disabled': !t.available,
+        'active': t.h  == value.h && t.m == value.m
+    }"
+    (click)="select(t)"
+    >
+        {{t.h|number:'2.0-0'}}:{{t.m|number:'2.0-0'}}
+    </span>
+</div>

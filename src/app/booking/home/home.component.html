@@ -1,13 +1,24 @@
-<main>
+<main [ngClass]="{'active': openSun}">
     <header>
         <small>Hello!</small>
         <h3>Book your tour now</h3>
     </header>
 
-    <div class="content">
+    <div class="content" *ngIf="nextDeparture.h > -1; else tomorrow">
         <h3>Next tour at</h3>
-        <h1>11:00</h1>
+        <h1>
+            {{nextDeparture.h| number:'2.0-0'}} : {{nextDeparture.m| number:'2.0-0'}} {{nextDeparture.h < 12 ? 'am' : 'pm'}}
+        </h1>
+        <h4>in {{countdown.m | number:'2.0-0'}} : {{countdown.s | number:'2.0-0'}}</h4>
     </div>
+    <ng-template #tomorrow>
+        <div class="content" style="color: var(--red)">
+            <h3 >Next tour is tomorrow at</h3>
+            <h1>
+                {{departures[0].h| number:'2.0-0'}} : {{departures[0].m| number:'2.0-0'}} {{departures[0].h < 12 ? 'am' : 'pm'}}
+            </h1>
+        </div>
+    </ng-template>
 
     <app-boat [active]="openSun"></app-boat>
 
@@ -15,6 +26,7 @@
     bg="var(--secondary)"
     text="Book now"
     icon=""
+    [extended]="true"
     (clickEvent)="bookNow()"
     ></app-button>
 </main>

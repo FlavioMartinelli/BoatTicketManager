@@ -1,0 +1,5 @@
+<div class="input">
+    <label for="">{{label}}</label>
+    <input type="number" [required]="required" [value]="value" readonly >
+    <input type="range" [value]="value" [min]="min" [max]="max" step="1" #inp (input)="setValue(inp.value)" (change)="trigger()" class="slider">
+</div>

@@ -1,1 +1,33 @@
-<p>datepicker works!</p>
+<div class="datepicker">
+    <header>
+        <i class="bi bi-chevron-left" (click)="prevMonth()"></i>
+        {{ currentNavigation | date:'MMMM YYYY'}}
+        <!-- {{currentNavigation}} -->
+        <i class="bi bi-chevron-right" (click)="nextMonth()"></i>
+    </header>
+    <div class="content">
+        <div class="legend">
+            <span class="disabled">M</span>
+            <span class="disabled">T</span>
+            <span class="disabled">W</span>
+            <span class="disabled">T</span>
+            <span class="disabled">F</span>
+            <span class="disabled">S</span>
+            <span class="disabled">S</span>
+        </div>
+
+        <div class="wrapper">
+            <span
+            *ngFor="let d of daysArray"
+            [ngClass]="{
+                'disabled': !d,
+                'active': d && isCurrentDay(d)
+            }"
+            (click)="selectDay(d)"
+            >
+                {{d ? d : "•"}}
+            </span>
+        </div>
+
+    </div>
+</div>

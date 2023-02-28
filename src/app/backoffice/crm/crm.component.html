@@ -1,1 +1,16 @@
-<p>crm works!</p>
+<!-- <ul>
+    <li *ngFor="let b of bookings">
+        {{b.departure}}
+        {{b.return}}
+    </li>
+</ul>
+
+<button (click)="testAdd()">ADD</button> -->
+<div class="container">
+    <header>
+        <button>Download</button>
+        <button [routerLink]="'/backoffice/scan'">Scan</button>
+    </header>
+    
+    <app-ticket></app-ticket>
+</div>

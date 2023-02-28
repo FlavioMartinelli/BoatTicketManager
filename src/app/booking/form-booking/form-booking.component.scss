@@ -1,0 +1,281 @@
+$radius: 5px;
+$navpadding: 5px;
+ 
+nav {
+    width: 100%;
+    background-color: var(--white);
+    padding: $navpadding;
+    border-radius: $radius;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+
+    span {
+        padding: 10px 20px;
+        box-sizing: border-box;
+        border-radius: $radius;
+        background-color: var(--primary);
+        color: var(--white);
+        margin-right: $navpadding;
+        text-align: center;
+
+        transition: var(--standard-transition);
+
+        flex: 1;
+        
+        opacity: .3;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .6;
+            margin-left: $navpadding *2;
+            margin-right: $navpadding *2;
+        }
+
+        &.active {
+            // width: 100%;
+            flex: 2;
+            opacity: 1;
+        }
+
+        &.valid {
+            opacity: 1;
+            background-color: var(--green);
+        }
+
+
+    }
+}
+
+// CONTAINER
+
+.container {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    position: relative;
+
+    //PAGES
+    .wrapper {
+        background-color: var(--white);
+        width: 100%;
+        position: relative;
+        border-top-left-radius: $radius * 2;
+        border-top-right-radius: $radius * 2;
+
+        // padding: 20px;
+        box-sizing: border-box;
+        flex: 1;
+
+        height: 100%;
+
+
+        section {
+            transition: var(--standard-transition);
+            width: 100%;
+
+            position: absolute;
+
+
+            height: 100%;
+
+
+            padding: 20px 20px 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+
+            box-sizing: border-box;
+            left: 0;
+
+            &#info {
+                overflow-y: auto;
+            }
+
+            .inputGroup {
+                h4 {
+                    width: 100%;
+                    text-align: left;
+                }
+                width: 100%;
+                position:relative;
+
+                
+            }
+
+            app-datepicker {
+                margin-bottom: 1em;
+            }
+
+            app-timepicker {
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+                margin-top: 1em;
+            }
+
+            hr {
+                width: 100%;
+                opacity: .6;
+            }
+
+            &.before {
+                transform: translateX(-100%);
+            }
+            &.current {
+                transform: translateX(0);
+            }
+            &.after {
+                transform: translateX(100%);
+            }
+
+
+        }
+
+
+    }
+
+
+    //Footer
+
+    footer {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        overflow: hidden;
+
+
+        app-ticket-substract {
+            width: 100%;
+            height: 0;
+            transition: var(--standard-transition);
+
+            &.active {
+                height: 100%;
+            }
+        }
+        
+        .bottom {
+            background-color: var(--white);
+            width: 100%;
+            border-bottom-left-radius: $radius * 2;
+            border-bottom-right-radius: $radius * 2;
+            padding: 20px;
+            box-sizing: border-box;
+
+            .column {
+                flex-direction: column;
+            }
+
+            
+            .iftemplate {
+                display: flex;
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
+                box-sizing: border-box;
+            }
+
+            .elsetemplate {
+                display: flex;
+                justify-content: stretch;
+
+                img, qrcode {
+                    margin-right: 1em;
+                    flex: 1;
+                }
+
+                p {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-evenly;
+                    font-weight: bold;
+                }
+
+                .column {
+                    display: flex;
+                    align-items: stretch;
+                    width: 100%;
+                    flex: 1;
+                }
+            }
+
+
+            #price {
+                display: flex;
+                flex-direction: column;
+                transition: var(--standard-transition);
+
+                h5 {
+                    margin: 0;
+                    font-size: 1em;
+                    margin-bottom: .6em;
+                    color: var(--black);
+                    opacity: .6;
+                }
+
+                div {
+                    display: flex;
+                    align-items: start;
+                    font-size: 1em;
+                    span {
+                        font-size: 1.5em;
+                        margin-left: .4em;
+                    }
+                }
+            }
+
+            app-button {
+                display: flex;
+                justify-content: flex-end;
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+
+#suqare {
+    background-color: red;
+    height: 100%;
+    width: 10px;
+    content: '';
+}
+
+
+
+
+//QR CODE
+::ng-deep {
+
+    qrcode {
+
+
+        height: auto;
+        position: relative;
+
+        div {
+
+            position: relative;
+            width: 100%;
+            
+            canvas {
+                width: 100%!important;
+                height: auto!important;
+            }
+        }
+
+    }
+}

@@ -1,0 +1,150 @@
+<nav *ngIf="page !=this.pageCount">
+    <span (click)="moveToSection(0)" [ngClass]="{'active': page == 0, 'valid': departure.valid && departure.touched, 'locked': locked}">Departure</span>
+    <span (click)="moveToSection(1)" [ngClass]="{'active': page == 1, 'valid': return.valid && return.touched, 'locked': locked}">Return</span>
+    <span (click)="moveToSection(2)" [ngClass]="{'active': page > 1, 'valid': crew.valid && crew.touched, 'locked': locked}">Crew</span>
+</nav>
+
+<form class="container" [formGroup]="form">
+    <div class="wrapper">
+        <section [ngClass]="[page == 0 ? 'current' : 'before']" [formGroup]="departure">
+            <app-datepicker
+            formControlName="date"
+            (change)="checkAvailableTime()"
+            ></app-datepicker>
+
+            Pick a departure time
+            <app-timepicker
+            formControlName="time"
+            (change)="checkAvailableTimeLeave()"
+            ></app-timepicker>
+        </section>
+        <section [ngClass]="[page == 1 ? 'current' :
+        page < 1 ? 'after' : 'before']" [formGroup]="return">
+            <h5>departure on</h5>
+            <h1>{{departure.value.date | date:'d MMMM YYYY'}}</h1>
+            <h2>
+                {{departure.value.time.h | number:'2.0-0'}}:{{departure.value.time.m | number:'2.0-0'}}
+            </h2>
+
+            <hr>
+
+            <h3>Pick a leaving time</h3>
+            <h5>you can change it later</h5>
+            <app-timepicker
+            formControlName="time"
+            (change)="null"
+            ></app-timepicker>
+        </section>
+        <section id="info"  [ngClass]="[page == 2 ? 'current' :
+        page < 2 ? 'after' : 'before']" [formGroup]="crew">
+                <!-- crew -->
+                <div class="inputGroup" [formGroup]="user">
+                    <h4>Your informations</h4>
+                    <app-input
+                    formControlName="name"
+                    type="text"
+                    [required]="true"
+                    label="Full name*"
+                    (keyup)="null"
+                    ></app-input>
+
+                    <app-input
+                    formControlName="email"
+                    type="email"
+                    label="Email *"
+                    [required]="true"
+                    ></app-input>
+
+                    <app-input
+                    formControlName="tel"
+                    type="tel"
+                    label="Telephone *"
+                    [required]="true"
+                    ></app-input>
+
+                    <app-slider-input
+                        label="Passengers *"
+                        [min]="1"
+                        [max]="10"
+                        (valueChanged)="setExtraMembers($event)"
+                    >
+
+                    </app-slider-input>
+
+                </div>
+                <div class="inputGroup" formArrayName="extras" *ngIf="extras.length > 0">
+                    <h4>Crew members informations</h4>
+                    <div *ngFor="let m of extras.controls; let k = index">
+                        <h5>Member {{k+1}}</h5>
+                        <div formGroupName="{{k}}">
+                            <app-input
+                            formControlName="name"
+                            type="text"
+                            [required]="true"
+                            label="Full name*"
+                            (keyup)="null"
+                            ></app-input>
+                         </div>
+                    </div>
+                </div>
+        </section>
+        <section [ngClass]="[page == 3 ? 'current' :
+        page < 3 ? 'after' : 'before']">
+                <!-- resoconto -->
+                test4
+        </section>
+        
+    </div>
+
+    <footer>
+            <app-ticket-substract
+            [ngClass]="{'active': page == this.pageCount}"
+            ></app-ticket-substract>
+    
+            <div class="bottom">
+
+                <div class="iftemplate"  *ngIf="page != pageCount; else qrFooter" [ngClass]="{'column': page == 3}">
+                    <span id="price" [ngStyle]="{'opacity': page > 1 ? '1' : '0', 'text-align': page == 3 ? 'center' : 'left'}">
+                        <h5>Total</h5>
+                        <div>
+                            €
+                            <span>{{total | number:'1.2-2'}}</span>
+                        </div>
+                    </span>
+        
+                    <app-button
+                    [text]="buttonText"
+                    [bg]="buttonColor"
+                    [extended]="buttonExtended"
+                    (clickEvent)="nextPage()"
+                    ></app-button>
+                </div>
+    
+                <ng-template #qrFooter>
+                    <div class="elsetemplate">
+                        <!-- <img src="../../../assets/demoqr.png" alt=""> -->
+                        <qrcode [qrdata]="qrData" [width]="156" [errorCorrectionLevel]="'M'"></qrcode>
+                        <div class="column">
+                            <p>
+                                <!-- <span *ngFor="let l of code.split('')">
+                                    {{l}}
+                                </span> -->
+                                {{code}}
+                            </p>
+    
+                            <app-button
+                            text="Download"
+                            [bg]="'var(--green)'"
+                            icon=""
+                            [extended]="true"
+                            ></app-button>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+
+        
+    </footer>
+
+</form>
+

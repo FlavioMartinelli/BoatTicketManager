@@ -1,1 +1,24 @@
-<p>scan works!</p>
+<div class="container">
+    <nav>
+        <button routerLink="/backoffice">INDIETRO</button>
+    </nav>
+    <div class="scanner-container">
+    
+        <div class="box"></div>
+    
+        <zxing-scanner
+            [formats]="allowedFormats"
+            previewFitMode="cover"
+            (camerasNotFound)="handleCamerasNotFound($event)"
+            (scanSuccess)="handleScanSuccess($event)"
+        ></zxing-scanner>
+
+    </div>
+
+</div>
+<!-- 
+<app-ticket
+    [ticket]="ticketInfo"
+    (closeEvent)="detachTicket()"
+    (validateEvent)="validate($event)"
+></app-ticket> -->

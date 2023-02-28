@@ -7,10 +7,14 @@ button {
     border: none;
     padding: 15px;
     box-sizing: border-box;
-    width: 100%;
     font-size: 1.1em;
     cursor: pointer;
-    transition: var(--standard-transition);
     text-align: center;
     font-weight: medium;
+    
+    transition: var(--standard-transition);
+
+    &.extended {
+        width: 100%;
+    }
 }

@@ -1,1 +1,45 @@
-<p>ticket works!</p>
+<div id="ticket" [ngClass]="{'active': expanded}">
+    <header>
+        <h5>departure on</h5>
+        <h1>{{ticket.booking.departure | date:'d MMMM YYYY'}}</h1>
+        <h3>{{ticket.booking.departure | date:'h : m'}}</h3>
+        
+        <h5>leaving at</h5>
+        <h3>{{ticket.booking.return | date:'h : m'}}</h3>
+
+        <h2>Crew members: {{ticket.booking.crew.extras.length}}</h2>
+        <div class="captain">
+            <img class="captain" src="../../assets/anchor.svg" alt="">
+            <div class="member">
+                <h3>{{ticket.booking.crew.user.name}}</h3>
+                <h5>{{ticket.booking.crew.user.email}}</h5>
+            </div>
+        </div>
+
+        <div class="more" (click)="expanded = !expanded">
+            <h5>{{expanded ? "show less" : "show more"}}
+                <i class="bi bi-caret-down"></i>
+            </h5>
+        </div>
+    </header>
+    <main>
+        <h4>full crew</h4>
+        <div class="member" *ngFor="let m of ticket.booking.crew.extras">
+            <h3>{{m.name}}</h3>
+            <h5>{{m.email}}</h5>
+        </div>
+    </main>
+    <app-ticket-substract></app-ticket-substract>
+    <footer>
+        <qrcode [qrdata]="qrData" [width]="156" [errorCorrectionLevel]="'M'"></qrcode>
+
+        <div class="col">
+            <h2>{{ticket.id}}</h2>
+            <app-button
+            [bg]="'var(--green)'"
+            icon=""
+            text="Download"
+            ></app-button>
+        </div>
+    </footer>
+</div>

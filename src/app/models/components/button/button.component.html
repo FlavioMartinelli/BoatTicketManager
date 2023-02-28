@@ -1,4 +1,4 @@
-<button (click)="click()" [ngStyle]="{'background-color': bg}">
+<button (click)="click()" [ngStyle]="{'background-color': bg}"  [ngClass]="{'extended': extended}">
     {{text}}
     <i class="bi" *ngIf="!!icon" ngClass="{{icon}}"></i>
 </button>

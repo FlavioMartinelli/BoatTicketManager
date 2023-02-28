@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'backoffice',
     loadChildren: ()=>import('./backoffice/backoffice.module').then(m=>m.BackofficeModule)
   },
+  {
+    path: 'auth',
+    loadChildren: ()=>import('./auth/auth.module').then(m=>m.AuthModule)
+  }
 ];
 
 @NgModule({

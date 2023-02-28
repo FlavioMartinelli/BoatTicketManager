@@ -1,0 +1,77 @@
+.datepicker {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    header {
+
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        i {
+            margin: 1em;
+            cursor: pointer;
+            opacity: .6;
+        }
+    }
+
+    .content {
+        position: relative;
+        width: 100%;
+        .legend {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            padding-bottom: .3em;
+
+        }
+
+        .wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+    
+            span {
+                cursor: pointer;
+                transition: var(--standard-transition);
+                &.disabled {
+                    text-decoration: line-through;
+                }
+                
+                &:hover {
+                    background-color: var(--primary);
+                }
+
+                &.active {
+                    background-color: var(--primary);
+                }
+            }
+        }
+        span {
+
+            flex: 1 0 13%;
+
+            box-sizing: border-box;
+            padding: .5em;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            border-radius: 5px;
+            
+            &.disabled {
+                opacity: .3;
+                pointer-events: none;
+            }
+
+        }
+    }
+
+
+}

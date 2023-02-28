@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonComponent {
   @Input() text = "button"
   @Input() icon = "bi-chevron-right"
+  @Input() extended = false
   //TODO: mettere ng-content
 
   @Input() bg = "var(--secondary)"

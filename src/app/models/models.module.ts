@@ -10,7 +10,7 @@ import { TickComponent } from './components/tick/tick.component';
 import { AnchorComponent } from './components/anchor/anchor.component';
 import { TicketSubstractComponent } from './components/ticket-substract/ticket-substract.component';
 import { ButtonComponent } from './components/button/button.component';
-
+import { SliderInputComponent } from './components/slider-input/slider-input.component';
 
 
 @NgModule({
@@ -24,13 +24,15 @@ import { ButtonComponent } from './components/button/button.component';
     TickComponent,
     AnchorComponent,
     TicketSubstractComponent,
-    ButtonComponent
+    ButtonComponent,
+    SliderInputComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
     CommonModule,
+    DatepickerComponent,
     TimepickerComponent,
     InputComponent,
     SearchbarComponent,
@@ -39,7 +41,8 @@ import { ButtonComponent } from './components/button/button.component';
     TickComponent,
     AnchorComponent,
     TicketSubstractComponent,
-    ButtonComponent
+    ButtonComponent,
+    SliderInputComponent
   ]
 })
 export class ModelsModule { }

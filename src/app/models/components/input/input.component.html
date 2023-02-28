@@ -1,1 +1,5 @@
-<p>input works!</p>
+<div class="input">
+    <input [type]="type" (keyup)="input(i.value)" #i [required]="required">
+    <label for="">{{label}}</label>
+    <div class="border"></div>
+</div>

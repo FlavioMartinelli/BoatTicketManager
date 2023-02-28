@@ -1,0 +1,45 @@
+.input {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    box-sizing: border-box;
+
+    label {
+        color: var(--fade-black);
+        text-transform: uppercase;
+    }
+
+    input {
+        width: 100%;
+
+        padding: 5px;
+        box-sizing: border-box;
+
+        padding: 0;
+        margin: 0;
+
+        background-color: transparent;
+        border:none;
+
+        &::-webkit-inner-spin-button {
+            display: none;
+        }
+    }
+
+    .slider {
+        background-color: var(--primary);
+        height: 2px;
+        outline: none;
+        border: none;
+        appearance: none;
+
+
+        &::-webkit-slider-thumb {
+            background: var(--primary);
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50% 50%;
+        }
+    }
+}

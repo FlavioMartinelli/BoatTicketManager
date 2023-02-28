@@ -5,16 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DatepickerComponent } from './models/components/datepicker/datepicker.component';
-import { TimepickerComponent } from './models/components/timepicker/timepicker.component';
-import { InputComponent } from './models/components/input/input.component';
-import { SearchbarComponent } from './models/components/searchbar/searchbar.component';
-import { BoatComponent } from './models/components/boat/boat.component';
-import { CloseComponent } from './models/components/close/close.component';
-import { TickComponent } from './models/components/tick/tick.component';
-import { AnchorComponent } from './models/components/anchor/anchor.component';
-import { TicketSubstractComponent } from './models/components/ticket-substract/ticket-substract.component';
-import { ButtonComponent } from './models/components/button/button.component';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { enviroment } from './enviroments/enviroment';
 
 @NgModule({
   declarations: [
@@ -23,7 +16,8 @@ import { ButtonComponent } from './models/components/button/button.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(enviroment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

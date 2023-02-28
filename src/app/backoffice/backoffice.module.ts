@@ -4,6 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { CrmComponent } from './crm/crm.component';
 import { ScanComponent } from './scan/scan.component';
 import { ModelsModule } from '../models/models.module';
+import { WebcamModule } from 'ngx-webcam';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { TicketComponent } from '../ticket/ticket.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 const routes : Routes = [
   {
@@ -20,12 +24,16 @@ const routes : Routes = [
 @NgModule({
   declarations: [
     CrmComponent,
-    ScanComponent
+    ScanComponent,
+    TicketComponent
   ],
   imports: [
     CommonModule,
     ModelsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    WebcamModule,
+    ZXingScannerModule,
+    QRCodeModule
   ],
   exports: [
     RouterModule

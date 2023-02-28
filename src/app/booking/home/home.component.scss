@@ -19,6 +19,7 @@ main {
         width: 100%;
         transform: translateY(-100%);
         z-index: 2;
+        transition: var(--standard-transition);
     }
 
     app-boat {
@@ -31,5 +32,18 @@ main {
     app-button {
         z-index: 2;
         width: 100%;
+        transition: var(--standard-transition);
+    }
+
+    &.active {
+        .content {
+            opacity: 0;
+        }
+
+        app-button {
+            opacity: 0;
+        }
+
+
     }
 }

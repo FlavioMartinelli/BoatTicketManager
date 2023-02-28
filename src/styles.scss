@@ -8,7 +8,8 @@
     
     --white: #fcfcfc;
     --black: #07020d;
-    
+
+    --fade-black: rgba(7, 2, 13, .3);
     --standard-transition: all .3s ease;
 }
 
@@ -26,10 +27,25 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    //TODO: non va 
+    // padding-bottom: env(safe-area-inset-bottom);
+
+    padding-bottom: 70px;
+    box-sizing: border-box;
+    background-color: var(--primary);
 }
 
 
 //TYPO
+
+h1, h2 {
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+h3, h4, h5 {
+    margin-top: .3em;
+    margin-bottom: .3em;
+}
 
 h1 {
     font-size: 2.2rem;
@@ -37,22 +53,22 @@ h1 {
     opacity: 1;
 }
 h2 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 400;
     opacity: 1;
 }
 h3 {
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-size: 1.6rem;
+    font-weight: 300;
     opacity: 1;
 }
 h4 {
     font-size: 1.4rem;
-    font-weight: 400;
+    font-weight: 300;
     opacity: .6;
 }
 h5 {
     font-size: 1.1rem;
-    font-weight: 400;
+    font-weight: 300;
     opacity: .6;
 }
