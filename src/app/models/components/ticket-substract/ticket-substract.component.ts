@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-ticket-substract',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./ticket-substract.component.scss']
 })
 export class TicketSubstractComponent {
+
+  @Input() bg = "var(--primary)"
 
 }

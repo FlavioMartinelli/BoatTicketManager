@@ -16,12 +16,12 @@ export class CrmComponent {
   ngOnInit() {
     this.cs.getBookings().subscribe(res=>{
       console.log(res);
-      this.bookings = this.cs.convertBookingData(res)
+      this.bookings = res
     })
   }
 
   testAdd() {
-    let demoBooking = {
+    let demoBooking:Booking = {
       departure: new Date(2023, 5, 6, 14, 30, 0 ,0),
       return: new Date(2023, 5, 6, 18, 30, 0, 0),
       crew: {

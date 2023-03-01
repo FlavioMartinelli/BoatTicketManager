@@ -1,0 +1,7 @@
+#ticketPage {
+    overflow: scroll;
+    width: 100vw;
+    max-height: 100vh;
+    box-sizing: border-box;
+    padding: 20px 20px var(--browser-bottom-padding);
+}

@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ModelsModule } from '../models/models.module';
 import { FormBookingComponent } from './form-booking/form-booking.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TicketPageComponent } from '../ticket/ticket-page/ticket-page.component';
 // import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
 
 const routes : Routes = [
@@ -17,11 +18,7 @@ const routes : Routes = [
   {
     path: 'booking',
     component: BookingComponent
-  },
-  {
-    path: 'ticket',
-    component: TicketComponent
-  },
+  }
 ]
 
 
@@ -37,8 +34,7 @@ const routes : Routes = [
     ModelsModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    FormsModule,
-    // QRCodeModule //TODO - non in app module
+    FormsModule
   ],
   exports: [
     RouterModule

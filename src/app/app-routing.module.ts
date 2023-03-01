@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TicketComponent } from './ticket/ticket.component';
+import { TicketPageComponent } from './ticket/ticket-page/ticket-page.component';
 
 const routes: Routes = [
   {
@@ -8,8 +8,8 @@ const routes: Routes = [
     loadChildren: ()=>import('./booking/booking.module').then(m=>m.BookingModule)
   },
   {
-    path: 'ticket',
-    component: TicketComponent
+    path: 'ticket/:id',
+    component: TicketPageComponent
   },
   {
     path: 'backoffice',

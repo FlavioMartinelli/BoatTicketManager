@@ -1,4 +1,4 @@
-<div id="ticket" [ngClass]="{'active': expanded}">
+<div id="ticket" [ngClass]="{'active': expanded || exportHide}">
     <header>
         <h5>departure on</h5>
         <h1>{{ticket.booking.departure | date:'d MMMM YYYY'}}</h1>
@@ -9,14 +9,14 @@
 
         <h2>Crew members: {{ticket.booking.crew.extras.length}}</h2>
         <div class="captain">
-            <img class="captain" src="../../assets/anchor.svg" alt="">
+            <img src="../../assets/anchor.svg" >
             <div class="member">
                 <h3>{{ticket.booking.crew.user.name}}</h3>
                 <h5>{{ticket.booking.crew.user.email}}</h5>
             </div>
         </div>
 
-        <div class="more" (click)="expanded = !expanded">
+        <div class="more" (click)="expanded = !expanded" *ngIf="!exportHide">
             <h5>{{expanded ? "show less" : "show more"}}
                 <i class="bi bi-caret-down"></i>
             </h5>
@@ -30,15 +30,41 @@
         </div>
     </main>
     <app-ticket-substract></app-ticket-substract>
-    <footer>
-        <qrcode [qrdata]="qrData" [width]="156" [errorCorrectionLevel]="'M'"></qrcode>
-
+    <footer
+        [ngStyle]="{'flex-direction': exportHide ? 'column' : 'row'}">
         <div class="col">
+            <h5 *ngIf="!exportHide">tap to zoom</h5>
+            <qrcode
+                [qrdata]="qrData"
+                [width]="exportHide ? 300 : 150"
+                [errorCorrectionLevel]="'M'"
+                (click)="exportHide = !exportHide"
+                ></qrcode>
+        </div>
+        <div class="col" [ngStyle]="{'order': exportHide ? -1 : 0}">
             <h2>{{ticket.id}}</h2>
+            <!-- DOWNLOAD -->
             <app-button
-            [bg]="'var(--green)'"
-            icon=""
-            text="Download"
+                *ngIf="!exportHide && !superadmin"
+                [bg]="'var(--green)'"
+                icon=""
+                text="Download"
+                (clickEvent)="download()"
+            ></app-button>
+            <!-- VALIDATION -->
+            <app-button
+                *ngIf="superadmin"
+                [bg]="'var(--green)'"
+                icon=""
+                text="Validate"
+                (clickEvent)="validate(true)"
+            ></app-button>
+            <app-button
+                *ngIf="superadmin"
+                [bg]="'var(--red)'"
+                icon=""
+                text="Refuse"
+                (clickEvent)="validate(false)"
             ></app-button>
         </div>
     </footer>

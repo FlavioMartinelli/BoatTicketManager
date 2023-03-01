@@ -11,6 +11,9 @@
 
     --fade-black: rgba(7, 2, 13, .3);
     --standard-transition: all .3s ease;
+
+    --browser-bottom-padding: env(safe-area-inset-bottom);
+    --browser-bottom-padding: 70px;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
@@ -28,9 +31,9 @@ body {
     height: 100vh;
     overflow: hidden;
     //TODO: non va 
-    // padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: var(--browser-bottom-padding);
 
-    padding-bottom: 70px;
+    // padding-bottom: 70px;
     box-sizing: border-box;
     background-color: var(--primary);
 }

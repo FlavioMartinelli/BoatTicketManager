@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Schedule } from 'src/app/models/interfaces';
+import { TicketService } from 'src/app/ticket/ticket.service';
 
 @Component({
   selector: 'app-home',
@@ -56,7 +57,7 @@ export class HomeComponent {
     return res ? res : {h:-1,m:0}
   }
 
-  constructor(private r:Router){}
+  constructor(private r:Router, private ts:TicketService){}
 
 
   openSun = false
@@ -85,6 +86,10 @@ export class HomeComponent {
         }
       }
     }, 1000)
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.countdownInterval)
   }
 
   resetCountdown() {

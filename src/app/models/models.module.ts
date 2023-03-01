@@ -29,8 +29,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     TicketSubstractComponent,
     ButtonComponent,
     SliderInputComponent,
-    TicketComponent,
-    LoadingComponent
+    TicketComponent
   ],
   imports: [
     CommonModule,
@@ -51,8 +50,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     TicketSubstractComponent,
     ButtonComponent,
     SliderInputComponent,
-    TicketComponent,
-    LoadingComponent
+    TicketComponent
   ]
 })
 export class ModelsModule { }

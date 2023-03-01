@@ -42,12 +42,16 @@ export interface BookingData {
 }
 export interface Booking {
     id?: string,
-    departure: Date|FirebaseTimestamp,
-    return:  Date|FirebaseTimestamp,
+    departure: Date,
+    return:  Date,
     crew: {
         user: Person,
         extras: Person[]
     }
+}
+export interface FireBooking extends Omit<Booking, 'departure' | 'return'> {
+    departure: FirebaseTimestamp,
+    return: FirebaseTimestamp
 }
 
 export interface FirebaseTimestamp {

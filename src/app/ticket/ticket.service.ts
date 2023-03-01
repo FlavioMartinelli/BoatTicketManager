@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
+import { catchError, map, Subject, take } from 'rxjs';
 import { enviroment } from '../enviroments/enviroment';
 import { CollectionsService } from '../models/collections.service';
-import { Booking, TicketData } from '../models/interfaces';
+import { Booking, Ticket, TicketData } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,18 @@ export class TicketService {
   }
 
   getTicketByID(id:string) {
-    return this.cs.getBookingById(id)
+    return this.cs.getTicketById(id)
+  }
+  getTicketDataByID(id:string) {
+    let ticketSBJ = new Subject<TicketData>()
+    this.getTicketByID(id).pipe(map(t=>{
+      return this.cs.getBookingById(t.booking).pipe(take(1)).subscribe(b=>{
+        ticketSBJ.next({...t, booking: {...b}} as TicketData)
+      })
+    }))
+
+
+    return ticketSBJ.asObservable()
   }
 
   readTicketData(data:string):TicketData {

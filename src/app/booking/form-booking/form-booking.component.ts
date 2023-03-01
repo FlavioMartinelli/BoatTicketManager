@@ -1,6 +1,7 @@
 import { Component, forwardRef } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CollectionsService } from 'src/app/models/collections.service';
+import { LoadingService } from 'src/app/models/components/loading/loading.service';
 import { Booking, Person, Schedule, TicketData } from 'src/app/models/interfaces';
 import { TicketService } from 'src/app/ticket/ticket.service';
 
@@ -19,7 +20,8 @@ export class FormBookingComponent {
   constructor(
     private fb:FormBuilder,
     private cs:CollectionsService,
-    private ts:TicketService
+    private ts:TicketService,
+    private ls:LoadingService
     ){}
 
   //UI
@@ -31,8 +33,6 @@ export class FormBookingComponent {
   page = 0
   buttonColor = 'var(--primary)'
   buttonText = ''
-
-  loading = false
 
   moveToSection(n:number) {
     if(n > this.pageCount) return
@@ -194,7 +194,7 @@ export class FormBookingComponent {
       const newTicket = await this.cs.addTicket(newBooking.id)
       //generate ticket
       const dataTicket:TicketData = {
-        id: newTicket.id,
+        id: newTicket.id!,
         booking: newBooking
       }
       //QR
@@ -212,7 +212,7 @@ export class FormBookingComponent {
 
   //SUBMIT - PAYMENT - TICKET
   async startPaymentProcess() {
-    this.loading = true
+    this.ls.setLoading(true)
     try{
       let res = await this.payment()
       let booking = await this.createBookingAndTicket()
@@ -220,7 +220,7 @@ export class FormBookingComponent {
       console.warn(err);
       throw err
     }
-    this.loading = false
+    this.ls.setLoading(false)
   }
 
   async payment(){

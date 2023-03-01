@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs';
-import { Booking, FirebaseTimestamp, Ticket } from './interfaces';
+import { map, take, tap } from 'rxjs';
+import { Booking, FirebaseTimestamp, FireBooking, Ticket } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -9,26 +9,48 @@ import { Booking, FirebaseTimestamp, Ticket } from './interfaces';
 export class CollectionsService {
   
   constructor(private afs:AngularFirestore) { }
-  
-  //BOOKINGS
-  
-  get bookings(){
-    return this.afs.collection<Booking>('booking')
-  }
-  
-  getBookings() {
-    // return this.bookings.valueChanges()
-    return this.bookings.snapshotChanges().pipe(map(res=>{
+
+  //FIREBASE
+
+  private getFireData<T>(collection:AngularFirestoreCollection<T>) {
+    return collection.snapshotChanges().pipe(map(res=>{
       return res.map(action => {
-        let data = action.payload.doc.data() as Booking
+        let data = action.payload.doc.data() as T
         const id = action.payload.doc.id;
-        return {id, ...data} as Booking
+        return {id, ...data} as T
       })
     }))
   }
   
+  //BOOKINGS
+  
+  private get bookings(){
+    return this.afs.collection<Booking|FireBooking>('booking')
+  }
+  
+  private get fireBookings() {
+    // return this.bookings.valueChanges()
+    return this.bookings.snapshotChanges().pipe(map(res=>{
+      return res.map(action => {
+        let data = action.payload.doc.data() as FireBooking
+        const id = action.payload.doc.id;
+        return {id, ...data} as FireBooking
+      })
+    }))
+  }
+
+  getBookings() {
+    console.log("GETTING ALL FIRE BOOKINGS");
+    return this.fireBookings.pipe(map(res=>this.convertFireBookingData(res)))
+  }
+  
+  getFireBookingById(id:string) {
+    console.log("GETTING FIRE BOOKING " + id);
+    return this.bookings.valueChanges({id: id}).pipe(map(res=>res[0] as FireBooking))
+  }
+
   getBookingById(id:string) {
-    return this.bookings.valueChanges({id: id})
+    return this.getFireBookingById(id).pipe(map(res=>this.convertFireToBooking(res)))
   }
 
   async addToCollection<T>(res:AngularFirestoreCollection<T>, data:T) {
@@ -38,17 +60,50 @@ export class CollectionsService {
   }
   
   addBooking(b:Booking) {
-    return this.addToCollection<Booking>(this.bookings, b)
+    return this.addToCollection<Booking>(this.bookings as AngularFirestoreCollection<Booking>, b)
+  }
+  addFireBooking(b:FireBooking) {
+    return this.addToCollection<FireBooking>(this.bookings as AngularFirestoreCollection<FireBooking>, b)
   }
 
-    convertBookingData(data:Booking[]): Booking[] {
-      return data.map(e=>({...e, departure: new Date((e.departure as FirebaseTimestamp).seconds * 1000), return: new Date((e.return as FirebaseTimestamp).seconds * 1000)}))
+  //CONVERTES - Booking
+  private convertFireBookingData(data:FireBooking[]): Booking[] {
+    return data.map(e=>this.convertFireToBooking(e))
+  }
+  private convertBookingData(data:Booking[]): FireBooking[] {
+    return data.map(e=>this.convertBookingToFire(e))
+  }
+
+  private convertFireToBooking(b:FireBooking):Booking{
+    return {...b, departure: new Date(b.departure.seconds * 1000), return: new Date(b.return.seconds * 1000)}
+  }
+  private convertBookingToFire(b:Booking):FireBooking{
+    let res:any = {...b}
+    res.departure = Math.round(b.departure.getTime()/1000)
+    res.return = Math.round(b.return.getTime()/1000)
+    return res as FireBooking
+  }
+
+    //TICKETS
+    private get tickets() {
+      return this.afs.collection<Ticket>('tickets')
+    }
+
+    getTickets() {
+      console.log("GETTING ALL TICKETS");
+      return this.getFireData(this.tickets)
     }
 
 
-    //TICKETS
-    get tickets() {
-      return this.afs.collection<Ticket>('tickets')
+
+    getTicketById(id:string) {
+      console.log("GETTING TICKET " + id);
+      
+      return this.tickets.valueChanges({id: id}).pipe(map(res=>{
+        console.log(res);
+        
+        return res[0]
+      }))
     }
 
     addTicket(idBooking: string) {

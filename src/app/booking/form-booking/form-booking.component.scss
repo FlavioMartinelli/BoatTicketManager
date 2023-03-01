@@ -257,28 +257,6 @@ nav {
 
 
 
-//QR CODE
-::ng-deep {
-
-    qrcode {
-
-
-        height: auto;
-        position: relative;
-
-        div {
-
-            position: relative;
-            width: 100%;
-            
-            canvas {
-                width: 100%!important;
-                height: auto!important;
-            }
-        }
-
-    }
-}
 
 #ticketSection {
     position: fixed;

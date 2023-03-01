@@ -1,11 +1,22 @@
 svg {
     transition: var(--standard-transition);
-    height: 100%;
-    width: 100%;
+    height: auto;
+    width: 115%;
     position: relative;
 
+    // padding-top: -1px;
+    margin-bottom: -5px;
+
+    // transform: scale(1.15);
+
+    border-top: 1px solid var(--white);
+    border-bottom: 1px solid var(--white);
+
+    z-index: -1;
+
     path {
-        transform: scale(1.1);
+        // transform: scale(1);
         transform-origin: center center;
+        fill: var(--white);
     }
 }

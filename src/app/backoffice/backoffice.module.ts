@@ -6,6 +6,7 @@ import { ScanComponent } from './scan/scan.component';
 import { ModelsModule } from '../models/models.module';
 import { WebcamModule } from 'ngx-webcam';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { TicketPageAdminComponent } from '../ticket/ticket-page/ticket-page-admin.component';
 // import { QRCodeModule } from 'angularx-qrcode';
 
 const routes : Routes = [
@@ -16,6 +17,11 @@ const routes : Routes = [
   {
     path: 'scan',
     component: ScanComponent,
+    data: {animation: 'openClosePage'}
+  },
+  {
+    path: 'ticket',
+    component: TicketPageAdminComponent,
     data: {animation: 'openClosePage'}
   }
 ]
