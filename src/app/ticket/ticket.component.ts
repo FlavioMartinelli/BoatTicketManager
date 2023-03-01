@@ -10,6 +10,7 @@ import { TicketService } from './ticket.service';
 export class TicketComponent {
 
   qrData!:string;
+  expanded = true
   
   constructor(private ts:TicketService){}
 
@@ -45,7 +46,6 @@ export class TicketComponent {
     }
   }
 
-  expanded = false
   
 
 }

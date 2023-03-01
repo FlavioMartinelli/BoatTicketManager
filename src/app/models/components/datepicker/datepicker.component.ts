@@ -56,14 +56,23 @@ export class DatepickerComponent implements ControlValueAccessor {
     this.currentNavigation = new Date(this.currentNavigation.getFullYear(), this.currentNavigation.getMonth() - 1, this.currentNavigation.getDate())
   }
 
-  get daysInMonth() {
-    const checkDate = new Date(this.currentNavigation.getFullYear(), this.currentNavigation.getMonth()+1,0)
-    return {days: checkDate.getDate()+1, startsFrom: checkDate.getDay()}
+  getDaysOfMonth(y:number, m:number):number {
+    return new Date(y, m+1, 0).getDate()
+  }
+
+  getStartingDay(y:number, m:number) {
+    return new Date(y, m, 0).getDay()
+  }
+
+  get daysInMonth() { 
+    const dim = this.getDaysOfMonth(this.currentNavigation.getFullYear(), this.currentNavigation.getMonth())  
+    const sd = this.getStartingDay(this.currentNavigation.getFullYear(), this.currentNavigation.getMonth())
+    return {days: dim, startsFrom: sd}
   }
 
   get daysArray() {
-    const a = Array.from(Array(this.daysInMonth.days).keys())
-    const missing = Array(this.daysInMonth.startsFrom-1).fill(null)
+    const a = Array.from(Array(this.daysInMonth.days).keys()).map(e=>e+1)
+    const missing = Array(this.daysInMonth.startsFrom).fill(null)
     let tolast = 0
     while((a.length + missing.length + tolast) % 7 != 0) {
       tolast++

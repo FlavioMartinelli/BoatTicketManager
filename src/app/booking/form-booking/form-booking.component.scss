@@ -279,3 +279,21 @@ nav {
 
     }
 }
+
+#ticketSection {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 0 20px;
+    overflow: auto;
+    top: 100%;
+    left: 0;
+    right: 0;
+    transition: var(--standard-transition);
+    background-color: var(--primary);
+
+    &.active {
+        top: 0;
+    }
+}

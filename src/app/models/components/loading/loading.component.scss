@@ -1,0 +1,70 @@
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+        background-color: var(--white);
+    }
+
+    25% {
+        transform: translateY(-50%);
+        background-color: var(--primary);
+    }
+
+    75% {
+        transform: translateY(+50%);
+        background-color: var(--primary);
+    }
+
+    to {
+        transform: translateY(0);
+        background-color: var(--white);
+    }
+}
+
+.loading {
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: none;
+    background-color: var(--fade-black);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    opacity: 0;
+    z-index: -1;
+    transition: var(--standard-transition);
+
+    .spinner {
+        display: flex;
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            background-color: var(--white);
+            animation: 1s infinite forwards;
+            animation-timing-function: linear;
+            animation-name: bounce;
+            margin: .5em;
+
+            &:nth-of-type(1) {
+                animation-delay: 0s;
+            }
+            &:nth-of-type(2) {
+                animation-delay: .3s;
+            }
+            &:nth-of-type(3) {
+                animation-delay: .6s;
+            }
+        }
+    }
+
+    &.active {
+        opacity: 1;
+        z-index: 99999;
+    }
+}

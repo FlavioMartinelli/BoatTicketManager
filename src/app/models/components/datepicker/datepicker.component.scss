@@ -39,7 +39,7 @@
                 cursor: pointer;
                 transition: var(--standard-transition);
                 &.disabled {
-                    text-decoration: line-through;
+                    // text-decoration: line-through;
                 }
                 
                 &:hover {

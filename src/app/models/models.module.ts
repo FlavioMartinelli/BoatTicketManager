@@ -11,6 +11,9 @@ import { AnchorComponent } from './components/anchor/anchor.component';
 import { TicketSubstractComponent } from './components/ticket-substract/ticket-substract.component';
 import { ButtonComponent } from './components/button/button.component';
 import { SliderInputComponent } from './components/slider-input/slider-input.component';
+import { TicketComponent } from '../ticket/ticket.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 @NgModule({
@@ -25,13 +28,18 @@ import { SliderInputComponent } from './components/slider-input/slider-input.com
     AnchorComponent,
     TicketSubstractComponent,
     ButtonComponent,
-    SliderInputComponent
+    SliderInputComponent,
+    TicketComponent,
+    LoadingComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    QRCodeModule
   ],
   exports: [
     CommonModule,
+    QRCodeModule,
+
     DatepickerComponent,
     TimepickerComponent,
     InputComponent,
@@ -42,7 +50,9 @@ import { SliderInputComponent } from './components/slider-input/slider-input.com
     AnchorComponent,
     TicketSubstractComponent,
     ButtonComponent,
-    SliderInputComponent
+    SliderInputComponent,
+    TicketComponent,
+    LoadingComponent
   ]
 })
 export class ModelsModule { }

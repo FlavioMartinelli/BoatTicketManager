@@ -97,13 +97,13 @@
     </div>
 
     <footer>
-            <app-ticket-substract
+            <!-- <app-ticket-substract
             [ngClass]="{'active': page == this.pageCount}"
             ></app-ticket-substract>
-    
+     -->
             <div class="bottom">
 
-                <div class="iftemplate"  *ngIf="page != pageCount; else qrFooter" [ngClass]="{'column': page == 3}">
+                <!-- <div class="iftemplate"  *ngIf="page != pageCount; else qrFooter" [ngClass]="{'column': page == 3}"> -->
                     <span id="price" [ngStyle]="{'opacity': page > 1 ? '1' : '0', 'text-align': page == 3 ? 'center' : 'left'}">
                         <h5>Total</h5>
                         <div>
@@ -118,17 +118,13 @@
                     [extended]="buttonExtended"
                     (clickEvent)="nextPage()"
                     ></app-button>
-                </div>
+                <!-- </div> -->
     
-                <ng-template #qrFooter>
+                <!-- <ng-template #qrFooter>
                     <div class="elsetemplate">
-                        <!-- <img src="../../../assets/demoqr.png" alt=""> -->
                         <qrcode [qrdata]="qrData" [width]="156" [errorCorrectionLevel]="'M'"></qrcode>
                         <div class="column">
                             <p>
-                                <!-- <span *ngFor="let l of code.split('')">
-                                    {{l}}
-                                </span> -->
                                 {{code}}
                             </p>
     
@@ -140,11 +136,25 @@
                             ></app-button>
                         </div>
                     </div>
-                </ng-template>
+                </ng-template> -->
+
             </div>
+            
+            
+        </footer>
 
+        <section
+        id="ticketSection"
+        [ngClass]="{'active': page == pageCount}"
+        >
+            <app-ticket
+            *ngIf="page == pageCount"
+            ></app-ticket>
+        </section>
         
-    </footer>
-
 </form>
+
+<app-loading
+    [active]="loading"
+></app-loading>
 

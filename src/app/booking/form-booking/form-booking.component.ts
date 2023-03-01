@@ -51,13 +51,13 @@ export class FormBookingComponent {
       case 1:
       case 2:
       case 3:
+        console.log("No behaviour");
         break;
 
       case this.pageCount:
         try{
           await this.startPaymentProcess()
           alert("Payment received and ticket created!");
-          
         } catch(err) {
           throw new Error("Error in the payment process")
         }
@@ -80,17 +80,6 @@ export class FormBookingComponent {
     this.moveToSection(this.page+1)
   }
 
-  async startPaymentProcess() {
-    this.loading = true
-    //TODO: payment then create
-    try{
-      await this.createBookingAndTicket()
-    } catch(err) {
-      throw new Error("Error creating booking and ticket")
-    }
-
-    this.loading = false
-  }
   
   //FORM
   form = this.fb.group({
@@ -154,6 +143,22 @@ export class FormBookingComponent {
     this.extras.removeAt(ind)
   }
 
+  setExtraMembers(n:number) {
+    console.log("MEMBERS", n);
+    
+    while(this.extras.length <= n) {
+      console.log("add");
+      
+      this.addCrewMember()
+    }
+    while(this.extras.length > n-1) {
+      console.log("remove");
+
+      this.removeCrewMember()
+    }
+  }
+
+
   //CHECKING TIMES
   checkAvailableTime() {
     console.log(this.departure.get('date')!.value);
@@ -198,29 +203,38 @@ export class FormBookingComponent {
       const ticketData = this.ts.readTicketData(this.qrData)
       console.log(ticketData);
     } else {
-      alert("Form non valido!")
+      alert("Form not valid!")
       console.log(this.form.value);
-      
+      throw new Error("Form not valid")
     }
   }
 
-  check() {    
-    console.log(this.form.value);
+
+  //SUBMIT - PAYMENT - TICKET
+  async startPaymentProcess() {
+    this.loading = true
+    try{
+      let res = await this.payment()
+      let booking = await this.createBookingAndTicket()
+    } catch(err) {
+      console.warn(err);
+      throw err
+    }
+    this.loading = false
   }
 
-
-  setExtraMembers(n:number) {
-    console.log("MEMBERS", n);
-    
-    while(this.extras.length <= n) {
-      console.log("add");
-      
-      this.addCrewMember()
-    }
-    while(this.extras.length > n-1) {
-      console.log("remove");
-
-      this.removeCrewMember()
+  async payment(){
+    //TODO: implement payment
+    try {
+      console.log("PAYMENT STARTED");
+      return await new Promise((s,e)=>{
+        setTimeout(()=>{
+          console.log("PAYMENT COMPLETED");
+          s(true)
+        }, 1500)
+      })
+    } catch(err) {
+      throw new Error("Payment Error")
     }
   }
 
